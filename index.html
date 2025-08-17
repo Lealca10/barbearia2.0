@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbearia Master</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="background-image"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1><i class="fas fa-cut"></i> Barbearia Master</h1>
+            </div>
+            <nav>
+                <ul class="nav-tabs">
+                    <li class="active" data-tab="inicio"><i class="fas fa-home"></i> Início</li>
+                    <li data-tab="agendar"><i class="fas fa-calendar-plus"></i> Agendar</li>
+                    <li data-tab="meus-agendamentos"><i class="fas fa-list"></i> Meus Agendamentos</li>
+                    <li data-tab="dashboard" class="admin-only"><i class="fas fa-chart-line"></i> Dashboard</li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <!-- Tab Início -->
+            <section id="inicio" class="tab-content active">
+                <div class="hero">
+                    <h2>Bem-vindo à Barbearia Master</h2>
+                    <p>Agende seu horário com os melhores profissionais</p>
+                    <button class="btn-primary" data-tab="agendar">Agendar Agora</button>
+                </div>
+                
+                <div class="barbeiros-section">
+                    <h3>Nossos Barbeiros</h3>
+                    <div class="barbeiros-grid" id="barbeirosHome">
+                        <!-- Preenchido por JS -->
+                    </div>
+                </div>
+                
+                <div class="servicos-section">
+                    <h3>Nossos Serviços</h3>
+                    <div class="servicos-grid" id="servicosHome">
+                        <!-- Preenchido por JS -->
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Tab Agendar -->
+            <section id="agendar" class="tab-content">
+                <h2><i class="fas fa-calendar-plus"></i> Agendar Serviço</h2>
+                <form id="agendamentoForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome"><i class="fas fa-user"></i> Seu Nome:</label>
+                            <input type="text" id="nome" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="telefone"><i class="fas fa-phone"></i> Telefone:</label>
+                            <input type="tel" id="telefone" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="barbeiro"><i class="fas fa-user-tie"></i> Barbeiro:</label>
+                            <select id="barbeiro" required>
+                                <option value="">Selecione um barbeiro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="servico"><i class="fas fa-cut"></i> Serviço:</label>
+                            <select id="servico" required>
+                                <option value="">Selecione um serviço</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="data"><i class="fas fa-calendar-day"></i> Data:</label>
+                            <input type="date" id="data" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="hora"><i class="fas fa-clock"></i> Hora:</label>
+                            <select id="hora" required>
+                                <option value="">Selecione um horário</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-calendar-check"></i> Confirmar Agendamento
+                        </button>
+                    </div>
+                </form>
+                
+                <div id="mensagem"></div>
+            </section>
+            
+            <!-- Tab Meus Agendamentos -->
+            <section id="meus-agendamentos" class="tab-content">
+                <h2><i class="fas fa-list"></i> Meus Agendamentos</h2>
+                <div class="filtros">
+                    <input type="text" id="filtroTelefone" placeholder="Digite seu telefone">
+                    <button id="buscarAgendamentos" class="btn-secondary">
+                        <i class="fas fa-search"></i> Buscar
+                    </button>
+                </div>
+                
+                <div id="listaAgendamentos">
+                    <!-- Preenchido por JS -->
+                </div>
+            </section>
+            
+            <!-- Tab Dashboard -->
+            <section id="dashboard" class="tab-content">
+                <h2><i class="fas fa-chart-line"></i> Dashboard</h2>
+                
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>Agendamentos Hoje</h3>
+                        <p id="agendamentosHoje">0</p>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h3>Agendamentos Esta Semana</h3>
+                        <p id="agendamentosSemana">0</p>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h3>Barbeiro Mais Ocupado</h3>
+                        <p id="barbeiroOcupado">-</p>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h3>Serviço Mais Popular</h3>
+                        <p id="servicoPopular">-</p>
+                    </div>
+                </div>
+                
+                <div class="graficos">
+                    <canvas id="graficoAgendamentos"></canvas>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

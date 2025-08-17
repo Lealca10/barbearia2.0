@@ -1,0 +1,37 @@
+{
+  "agendamentos": [
+    {
+      "id": 1,
+      "nomeCliente": "João da Silva",
+      "telefone": "11999998888",
+      "barbeiroId": 1,
+      "servicoId": 1,
+      "data": "2023-06-15",
+      "hora": "10:00",
+      "criadoEm": "2023-06-10T14:30:00Z",
+      "preco": 50
+    },
+    {
+      "id": 2,
+      "nomeCliente": "Maria Oliveira",
+      "telefone": "11988887777",
+      "barbeiroId": 2,
+      "servicoId": 3,
+      "data": "2023-06-16",
+      "hora": "14:30",
+      "criadoEm": "2023-06-10T15:45:00Z",
+      "preco": 75
+    },
+    {
+      "id": "c21f",
+      "nomeCliente": "David Lucca",
+      "telefone": "47 999265874",
+      "barbeiroId": 4,
+      "servicoId": 1,
+      "data": "2025-08-18",
+      "hora": "08:00",
+      "criadoEm": "2025-08-17T20:38:52.349Z",
+      "preco": 50
+    }
+  ]
+}
