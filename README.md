@@ -1,6 +1,8 @@
 Sistema de Agendamento para Barbearia
 Este é um sistema de agendamento completo para barbearia, com interface responsiva e integração com JSON Server para armazenamento de dados.
 
+Está disponível em: https://barbearia2-0-ten.vercel.app/
+
 📋 Funcionalidades
 Sistema de abas para fácil navegação
 
