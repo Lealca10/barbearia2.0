@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
             id: 1, 
             nome: 'Corte de Cabelo', 
             duracao: 30, 
-            preco: 50, 
+            preco: 40, 
             imagem: 'assets/servicos/corte.jpg',
             descricao: 'Corte profissional com técnicas modernas e acabamento perfeito.'
         },

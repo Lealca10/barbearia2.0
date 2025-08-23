@@ -9,7 +9,7 @@
       "data": "2023-06-15",
       "hora": "10:00",
       "criadoEm": "2023-06-10T14:30:00Z",
-      "preco": 50
+      "preco": 40
     },
     {
       "id": 2,
@@ -31,7 +31,18 @@
       "data": "2025-08-18",
       "hora": "08:00",
       "criadoEm": "2025-08-17T20:38:52.349Z",
-      "preco": 50
+      "preco": 40
+    },
+    {
+      "id": "1708",
+      "nomeCliente": "José da Silva",
+      "telefone": "47 999265874",
+      "barbeiroId": 1,
+      "servicoId": 2,
+      "data": "2025-08-17",
+      "hora": "14:00",
+      "criadoEm": "2025-08-17T20:46:31.887Z",
+      "preco": 35
     }
   ]
 }
