@@ -1,0 +1,13 @@
+{
+  "name": "barbearia2.0",
+  "version": "1.0.0",
+  "description": "Sistema de Agendamento para Barbearia\r Este é um sistema de agendamento completo para barbearia, com interface responsiva e integração com JSON Server para armazenamento de dados.",
+  "main": "script.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
