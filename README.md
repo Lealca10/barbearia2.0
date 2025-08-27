@@ -72,6 +72,7 @@ Inicie o JSON Server:
 
 bash
 json-server --watch db.json --port 3000
+Ou npx json-server --watch db.json
 Abra o arquivo index.html em um servidor local:
 
 Se estiver usando o VSCode, instale a extensão "Live Server" e clique em "Go Live"

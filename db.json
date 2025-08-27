@@ -79,6 +79,30 @@
       "criadoEm": "2025-08-26T23:53:04.598Z",
       "preco": 40,
       "status": "confirmado"
+    },
+    {
+      "id": "4cd0",
+      "nomeCliente": "Gustavo",
+      "telefone": "47991247586",
+      "barbeiroId": 2,
+      "servicoId": 1,
+      "data": "2025-08-27",
+      "hora": "17:00",
+      "criadoEm": "2025-08-27T00:30:24.730Z",
+      "preco": 40,
+      "status": "agendado"
+    },
+    {
+      "id": "793e",
+      "nomeCliente": "José Valdir",
+      "telefone": "4733364578",
+      "barbeiroId": 3,
+      "servicoId": 3,
+      "data": "2025-08-26",
+      "hora": "08:30",
+      "criadoEm": "2025-08-27T00:31:50.248Z",
+      "preco": 75,
+      "status": "agendado"
     }
   ]
 }
