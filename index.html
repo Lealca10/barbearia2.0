@@ -61,7 +61,8 @@
                         
                         <div class="form-group">
                             <label for="telefone"><i class="fas fa-phone"></i> Telefone:</label>
-                            <input type="tel" id="telefone" required>
+                            <input type="text" id="telefone" placeholder="(11) 99999-9999" required>
+                            <p class="hint">O telefone será formatado automaticamente</p>
                         </div>
                     </div>
                     
@@ -115,6 +116,13 @@
                     </button>
                 </div>
                 
+                <div class="filtro-status">
+                    <button class="ativo" data-status="todos">Todos</button>
+                    <button data-status="agendado">Agendados</button>
+                    <button data-status="confirmado">Confirmados</button>
+                    <button data-status="cancelado">Cancelados</button>
+                </div>
+                
                 <div id="listaAgendamentos">
                     <!-- Preenchido por JS -->
                 </div>
@@ -136,6 +144,16 @@
                     </div>
                     
                     <div class="dashboard-card">
+                        <h3>Total de Agendamentos</h3>
+                        <p id="totalAgendamentos">0</p>
+                    </div>
+                    
+                    <div class="dashboard-card valor-receber">
+                        <h3>Valor a Receber</h3>
+                        <p id="valorReceber">R$ 0</p>
+                    </div>
+                    
+                    <div class="dashboard-card">
                         <h3>Barbeiro Mais Ocupado</h3>
                         <p id="barbeiroOcupado">-</p>
                     </div>
@@ -148,6 +166,11 @@
                 
                 <div class="graficos">
                     <canvas id="graficoAgendamentos"></canvas>
+                </div>
+                
+                <!--<h3>Agendamentos Confirmados</h3>
+                <div id="listaConfirmados">
+                    Preenchido por JS -->
                 </div>
             </section>
         </main>

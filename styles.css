@@ -99,6 +99,10 @@ header {
     animation: fadeIn 0.5s;
 }
 
+.tab-content h2 {
+    margin-bottom: 12px;
+}
+
 .tab-content.active {
     display: block;
 }
@@ -421,6 +425,159 @@ input:focus, select:focus {
     padding: 20px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
+}
+
+.status-agendado {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.status-confirmado {
+    background-color: #28a745;
+    color: white;
+}
+
+.status-cancelado {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-confirmar {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.btn-confirmar:hover {
+    background-color: #218838;
+}
+
+/* Estilos para os status */
+.status-agendado {
+    background-color: #ffc107;
+    color: #333;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-confirmado {
+    background-color: #28a745;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-cancelado {
+    background-color: #dc3545;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Botões de confirmação e cancelamento */
+.btn-confirmar {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.btn-confirmar:hover {
+    background-color: #218838;
+}
+
+.btn-cancelar {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.btn-cancelar:hover {
+    background-color: #c82333;
+}
+
+/* Filtro por status */
+.filtro-status {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.filtro-status button {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    background: #f5f5f5;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.filtro-status button.ativo {
+    background: #d4af37;
+    color: white;
+    border-color: #d4af37;
+}
+
+/* Cartão de valor a receber */
+.valor-receber {
+    border-top: 4px solid #28a745 !important;
+}
+
+.valor-receber p {
+    color: #28a745 !important;
+}
+
+/* Texto de ajuda */
+.hint {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Rodapé do card de agendamento */
+.agendamento-footer {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Ajustes para mobile */
+@media (max-width: 768px) {
+    .agendamento-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .agendamento-footer button {
+        width: 100%;
+    }
+    
+    .filtro-status {
+        justify-content: center;
+    }
 }
 
 /* Responsividade */

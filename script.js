@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const agendamentosSemana = document.getElementById('agendamentosSemana');
     const barbeiroOcupado = document.getElementById('barbeiroOcupado');
     const servicoPopular = document.getElementById('servicoPopular');
+    const valorReceber = document.getElementById('valorReceber');
+    const totalAgendamentos = document.getElementById('totalAgendamentos');
     
     // URL base do JSON Server
     const API_URL = 'http://localhost:3000';
@@ -91,8 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
             preco: 120, 
             imagem: 'assets/servicos/pigmentacao.jpg',
             descricao: 'Técnica avançada para cobrir fios brancos e uniformizar a cor.'
-        }
-        ,
+        },
         { 
             id: 5, 
             nome: 'Kids', 
@@ -116,6 +117,53 @@ document.addEventListener('DOMContentLoaded', function() {
         '11:00', '11:30', '13:00', '13:30', '14:00', '14:30',
         '15:00', '15:30', '16:00', '16:30', '17:00', '17:30'
     ];
+    
+    // Máscara para telefone
+    const telefoneInput = document.getElementById('telefone');
+    telefoneInput.addEventListener('input', function() {
+        mascaraTelefone(this);
+    });
+    
+    telefoneInput.addEventListener('keydown', function(e) {
+        // Permite apenas números e teclas de controle
+        if (!/[0-9]|Backspace|Delete|ArrowLeft|ArrowRight|Tab/.test(e.key)) {
+            e.preventDefault();
+        }
+    });
+    
+    function mascaraTelefone(telefone) {
+        // Remove tudo que não é dígito
+        const texto = telefone.value.replace(/\D/g, '');
+        
+        // Limita a 11 dígitos (formato celular)
+        const textoLimpo = texto.substring(0, 11);
+        
+        // Aplica a máscara conforme o tamanho do número
+        if (textoLimpo.length <= 10) {
+            // Telefone fixo: (11) 4444-4444
+            telefone.value = textoLimpo.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+        } else {
+            // Celular: (11) 99999-9999
+            telefone.value = textoLimpo.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+        }
+    }
+    
+    // Máscara para o campo de filtro também
+    const filtroTelefoneInput = document.getElementById('filtroTelefone');
+    filtroTelefoneInput.addEventListener('input', function() {
+        mascaraTelefone(this);
+    });
+    
+    // Filtro por status
+    document.querySelectorAll('.filtro-status button').forEach(button => {
+        button.addEventListener('click', function() {
+            document.querySelectorAll('.filtro-status button').forEach(btn => btn.classList.remove('ativo'));
+            this.classList.add('ativo');
+            
+            const status = this.getAttribute('data-status');
+            carregarAgendamentos(status);
+        });
+    });
     
     // Navegação por tabs
     navTabs.forEach(tab => {
@@ -286,15 +334,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Carregar agendamentos do JSON Server
-    async function carregarAgendamentos(telefone = '') {
+    async function carregarAgendamentos(statusFiltro = 'todos', telefoneFiltro = '') {
         try {
             let url = `${API_URL}/agendamentos`;
-            if (telefone) {
-                url += `?telefone=${telefone}`;
-            }
             
             const response = await fetch(url);
-            const agendamentos = await response.json();
+            let agendamentos = await response.json();
+            
+            // Filtrar por status se necessário
+            if (statusFiltro !== 'todos') {
+                agendamentos = agendamentos.filter(ag => ag.status === statusFiltro);
+            }
+            
+            // Filtrar por telefone se fornecido
+            if (telefoneFiltro) {
+                const telefoneLimpoFiltro = telefoneFiltro.replace(/\D/g, '');
+                agendamentos = agendamentos.filter(ag => {
+                    const telefoneLimpoAg = ag.telefone.replace(/\D/g, '');
+                    return telefoneLimpoAg.includes(telefoneLimpoFiltro);
+                });
+            }
             
             listaAgendamentos.innerHTML = '';
             
@@ -314,25 +373,44 @@ document.addEventListener('DOMContentLoaded', function() {
                 const barbeiro = barbeiros.find(b => b.id === agendamento.barbeiroId);
                 const servico = servicos.find(s => s.id === agendamento.servicoId);
                 
+                // Determinar a classe de status
+                let statusClass = 'status-agendado';
+                let statusText = 'Agendado';
+                
+                if (agendamento.status === 'confirmado') {
+                    statusClass = 'status-confirmado';
+                    statusText = 'Confirmado';
+                } else if (agendamento.status === 'cancelado') {
+                    statusClass = 'status-cancelado';
+                    statusText = 'Cancelado';
+                }
+                
                 const card = document.createElement('div');
                 card.className = 'agendamento-card';
                 card.innerHTML = `
                     <div class="agendamento-header">
                         <span class="agendamento-servico">${servico.nome}</span>
-                        <span class="agendamento-status">Agendado</span>
+                        <span class="agendamento-status ${statusClass}">${statusText}</span>
                     </div>
                     <div class="agendamento-body">
                         <p><i class="fas fa-user-tie"></i> Barbeiro: ${barbeiro.nome}</p>
                         <p><i class="fas fa-calendar-day"></i> Data: ${formatarData(agendamento.data)}</p>
                         <p><i class="fas fa-clock"></i> Hora: ${agendamento.hora}</p>
                         <p><i class="fas fa-user"></i> Cliente: ${agendamento.nomeCliente}</p>
-                        <p><i class="fas fa-phone"></i> Telefone: ${agendamento.telefone}</p>
+                        <p><i class="fas fa-phone"></i> Telefone: ${formatarTelefoneExibicao(agendamento.telefone)}</p>
                         <p><i class="fas fa-money-bill-wave"></i> Valor: R$ ${servico.preco}</p>
                     </div>
                     <div class="agendamento-footer">
-                        <button class="btn-cancelar" onclick="cancelarAgendamento(${agendamento.id})">
-                            <i class="fas fa-times"></i> Cancelar
-                        </button>
+                        ${agendamento.status === 'agendado' ? `
+                            <button class="btn-confirmar" onclick="confirmarAgendamento(${agendamento.id})">
+                                <i class="fas fa-check"></i> Confirmar
+                            </button>
+                        ` : ''}
+                        ${agendamento.status !== 'cancelado' ? `
+                            <button class="btn-cancelar" onclick="cancelarAgendamento(${agendamento.id})">
+                                <i class="fas fa-times"></i> ${agendamento.status === 'cancelado' ? 'Cancelado' : 'Cancelar'}
+                            </button>
+                        ` : ''}
                     </div>
                 `;
                 
@@ -341,6 +419,21 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch (error) {
             console.error('Erro ao carregar agendamentos:', error);
             mostrarMensagem('Erro ao carregar agendamentos.', 'erro');
+        }
+    }
+    
+    // Função para formatar telefone para exibição
+    function formatarTelefoneExibicao(telefone) {
+        // Remove tudo que não é dígito
+        const texto = telefone.replace(/\D/g, '');
+        
+        // Aplica a máscara conforme o tamanho do número
+        if (texto.length <= 10) {
+            // Telefone fixo: (11) 4444-4444
+            return texto.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+        } else {
+            // Celular: (11) 99999-9999
+            return texto.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
         }
     }
     
@@ -401,6 +494,19 @@ document.addEventListener('DOMContentLoaded', function() {
             const servico = servicos.find(s => s.id === parseInt(servicoMaisPopularId));
             servicoPopular.textContent = servico ? servico.nome : '-';
             
+            // Valor a receber (somente agendamentos confirmados)
+            const valorReceberTotal = agendamentos
+                .filter(a => a.status === 'confirmado')
+                .reduce((total, ag) => {
+                    const servico = servicos.find(s => s.id === ag.servicoId);
+                    return total + (servico ? servico.preco : 0);
+                }, 0);
+            
+            valorReceber.textContent = `R$ ${valorReceberTotal}`;
+            
+            // Total de agendamentos
+            totalAgendamentos.textContent = agendamentos.length;
+            
             // Gráfico de agendamentos por dia
             criarGraficoAgendamentos(agendamentos);
             
@@ -449,17 +555,66 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Função para confirmar agendamento
+    window.confirmarAgendamento = async function(id) {
+        if (confirm('Tem certeza que deseja confirmar este agendamento?')) {
+            try {
+                const response = await fetch(`${API_URL}/agendamentos/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        status: 'confirmado'
+                    })
+                });
+                
+                if (response.ok) {
+                    mostrarMensagem('Agendamento confirmado com sucesso!', 'sucesso');
+                    
+                    // Recarregar com o filtro atual
+                    const statusAtivo = document.querySelector('.filtro-status button.ativo')?.getAttribute('data-status') || 'todos';
+                    carregarAgendamentos(statusAtivo, filtroTelefone.value);
+                    
+                    // Se estiver na dashboard, atualiza os dados
+                    if (document.querySelector('.nav-tabs li.active').getAttribute('data-tab') === 'dashboard') {
+                        carregarDashboard();
+                    }
+                } else {
+                    throw new Error('Falha ao confirmar agendamento');
+                }
+            } catch (error) {
+                console.error('Erro ao confirmar agendamento:', error);
+                mostrarMensagem('Erro ao confirmar agendamento.', 'erro');
+            }
+        }
+    };
+    
     // Função para cancelar agendamento
     window.cancelarAgendamento = async function(id) {
         if (confirm('Tem certeza que deseja cancelar este agendamento?')) {
             try {
                 const response = await fetch(`${API_URL}/agendamentos/${id}`, {
-                    method: 'DELETE'
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        status: 'cancelado'
+                    })
                 });
                 
                 if (response.ok) {
                     mostrarMensagem('Agendamento cancelado com sucesso!', 'sucesso');
-                    carregarAgendamentos(filtroTelefone.value);
+                    
+                    // Recarregar com o filtro atual
+                    const statusAtivo = document.querySelector('.filtro-status button.ativo')?.getAttribute('data-status') || 'todos';
+                    carregarAgendamentos(statusAtivo, filtroTelefone.value);
+                    
+                    // Se estiver na dashboard, atualiza os dados
+                    if (document.querySelector('.nav-tabs li.active').getAttribute('data-tab') === 'dashboard') {
+                        carregarDashboard();
+                    }
                 } else {
                     throw new Error('Falha ao cancelar agendamento');
                 }
@@ -519,13 +674,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify({
                     nomeCliente,
-                    telefone,
+                    telefone: telefone.replace(/\D/g, ''), // Salvar apenas números
                     barbeiroId,
                     servicoId,
                     data,
                     hora,
                     criadoEm: new Date().toISOString(),
-                    preco: servico.preco
+                    preco: servico.preco,
+                    status: 'agendado' // Status padrão
                 })
             });
             
@@ -536,7 +692,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Atualizar lista de agendamentos se estiver na tab correta
                 if (document.querySelector('.nav-tabs li.active').getAttribute('data-tab') === 'meus-agendamentos') {
-                    carregarAgendamentos(telefone);
+                    const telefoneLimpo = telefone.replace(/\D/g, '');
+                    carregarAgendamentos('todos', telefoneLimpo);
                 }
             } else {
                 throw new Error('Falha ao agendar');
@@ -549,7 +706,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Buscar agendamentos por telefone
     buscarAgendamentos.addEventListener('click', function() {
-        carregarAgendamentos(filtroTelefone.value);
+        const statusAtivo = document.querySelector('.filtro-status button.ativo')?.getAttribute('data-status') || 'todos';
+        carregarAgendamentos(statusAtivo, filtroTelefone.value);
     });
     
     // Atualizar horários quando dados mudarem

@@ -1,17 +1,6 @@
 {
   "agendamentos": [
     {
-      "id": "1",
-      "nomeCliente": "João da Silva",
-      "telefone": "11999998888",
-      "barbeiroId": 1,
-      "servicoId": 1,
-      "data": "2023-06-15",
-      "hora": "10:00",
-      "criadoEm": "2023-06-10T14:30:00Z",
-      "preco": 40
-    },
-    {
       "id": "2",
       "nomeCliente": "Maria Oliveira",
       "telefone": "11988887777",
@@ -20,7 +9,8 @@
       "data": "2023-06-16",
       "hora": "14:30",
       "criadoEm": "2023-06-10T15:45:00Z",
-      "preco": 75
+      "preco": 75,
+      "status": "cancelado"
     },
     {
       "id": "c21f",
@@ -54,6 +44,41 @@
       "hora": "08:30",
       "criadoEm": "2025-08-26T00:18:19.487Z",
       "preco": 35
+    },
+    {
+      "id": "6da5",
+      "nomeCliente": "Rodrigo",
+      "telefone": "11 999999999",
+      "barbeiroId": 2,
+      "servicoId": 1,
+      "data": "2025-08-27",
+      "hora": "10:00",
+      "criadoEm": "2025-08-26T22:15:58.952Z",
+      "preco": 40
+    },
+    {
+      "id": "dff8",
+      "nomeCliente": "Leonardo de Lara",
+      "telefone": "47999527412",
+      "barbeiroId": 4,
+      "servicoId": 4,
+      "data": "2025-08-27",
+      "hora": "14:30",
+      "criadoEm": "2025-08-26T23:51:31.191Z",
+      "preco": 120,
+      "status": "agendado"
+    },
+    {
+      "id": "4004",
+      "nomeCliente": "Vilson",
+      "telefone": "47984612357",
+      "barbeiroId": 1,
+      "servicoId": 1,
+      "data": "2025-08-26",
+      "hora": "17:30",
+      "criadoEm": "2025-08-26T23:53:04.598Z",
+      "preco": 40,
+      "status": "confirmado"
     }
   ]
 }
