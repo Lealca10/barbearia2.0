@@ -1,7 +1,7 @@
 {
   "agendamentos": [
     {
-      "id": "2",
+      "id": 2,
       "nomeCliente": "Maria Oliveira",
       "telefone": "11988887777",
       "barbeiroId": 2,
@@ -13,7 +13,7 @@
       "status": "cancelado"
     },
     {
-      "id": "c21f",
+      "id": 3,
       "nomeCliente": "David Lucca",
       "telefone": "47 999265874",
       "barbeiroId": 4,
@@ -24,7 +24,7 @@
       "preco": 40
     },
     {
-      "id": "1708",
+      "id": 4,
       "nomeCliente": "José da Silva",
       "telefone": "47 999265874",
       "barbeiroId": 1,
@@ -35,7 +35,7 @@
       "preco": 35
     },
     {
-      "id": "4a25",
+      "id": 5,
       "nomeCliente": "Antonio",
       "telefone": "47996558256",
       "barbeiroId": 1,
@@ -46,7 +46,7 @@
       "preco": 35
     },
     {
-      "id": "6da5",
+      "id": 6,
       "nomeCliente": "Rodrigo",
       "telefone": "11 999999999",
       "barbeiroId": 2,
@@ -57,7 +57,7 @@
       "preco": 40
     },
     {
-      "id": "dff8",
+      "id": 7,
       "nomeCliente": "Leonardo de Lara",
       "telefone": "47999527412",
       "barbeiroId": 4,
@@ -69,7 +69,7 @@
       "status": "agendado"
     },
     {
-      "id": "4004",
+      "id": 8,
       "nomeCliente": "Vilson",
       "telefone": "47984612357",
       "barbeiroId": 1,
@@ -81,7 +81,7 @@
       "status": "confirmado"
     },
     {
-      "id": "4cd0",
+      "id": 9,
       "nomeCliente": "Gustavo",
       "telefone": "47991247586",
       "barbeiroId": 2,
@@ -93,7 +93,7 @@
       "status": "agendado"
     },
     {
-      "id": "793e",
+      "id": 10,
       "nomeCliente": "José Valdir",
       "telefone": "4733364578",
       "barbeiroId": 3,
@@ -103,6 +103,78 @@
       "criadoEm": "2025-08-27T00:31:50.248Z",
       "preco": 75,
       "status": "agendado"
+    },
+    {
+      "id": 11,
+      "nomeCliente": "Antonio",
+      "telefone": "4732310505",
+      "barbeiroId": 2,
+      "servicoId": 2,
+      "data": "2025-08-27",
+      "hora": "15:30",
+      "criadoEm": "2025-08-27T21:56:14.390Z",
+      "preco": 35,
+      "status": "agendado"
+    },
+    {
+      "id": "ae8a",
+      "nomeCliente": "Kairo",
+      "telefone": "47998874123",
+      "barbeiroId": 4,
+      "servicoId": 1,
+      "data": "2025-08-28",
+      "hora": "10:00",
+      "criadoEm": "2025-08-27T21:57:58.520Z",
+      "preco": 40,
+      "status": "agendado"
+    },
+    {
+      "id": "51fb",
+      "nomeCliente": "Abel Braga",
+      "telefone": "21999955663",
+      "barbeiroId": 3,
+      "servicoId": 2,
+      "data": "2025-08-28",
+      "hora": "15:30",
+      "criadoEm": "2025-08-27T22:07:13.629Z",
+      "preco": 35,
+      "status": "agendado"
+    },
+    {
+      "id": "790d",
+      "nomeCliente": "Luiz Carlos",
+      "telefone": "47999862547",
+      "barbeiroId": 3,
+      "servicoId": 3,
+      "data": "2025-08-29",
+      "hora": "09:30",
+      "criadoEm": "2025-08-27T22:10:03.205Z",
+      "preco": 75,
+      "status": "agendado"
+    },
+    {
+      "nomeCliente": "Fernando",
+      "telefone": "11987123456",
+      "barbeiroId": 4,
+      "servicoId": 1,
+      "data": "2025-08-28",
+      "hora": "17:30",
+      "criadoEm": "2025-08-27T22:16:35.069Z",
+      "preco": 40,
+      "status": "agendado",
+      "id": "XoEiNaY"
+    },
+    {
+      "nomeCliente": "Renan",
+      "telefone": "48998347521",
+      "barbeiroId": 2,
+      "servicoId": 1,
+      "data": "2025-08-29",
+      "hora": "14:30",
+      "criadoEm": "2025-08-27T22:21:58.208Z",
+      "preco": 40,
+      "status": "agendado",
+      "id": 12
     }
   ]
 }
